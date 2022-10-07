@@ -272,17 +272,13 @@ public class UiControl : MonoBehaviour
     {
         if (menuSelected != null)
         {
-            menuSelected.transform.Find("Title").GetComponent<Text>()
-            .color = MainService.RGBToColor("rgb(255, 255, 255)");
-            menuSelected.transform.Find("Icon").GetComponent<Image>()
-            .color = MainService.RGBToColor("rgb(120, 120, 120)");
+            menuSelected.transform.Find("Title").GetComponent<Text>().color = MainService.RGBToColor("rgb(255, 255, 255)");
+            menuSelected.transform.Find("Icon").GetComponent<Image>().color = MainService.RGBToColor("rgb(120, 120, 120)");
         }
 
         menuSelected = active;
-        active.transform.Find("Title").GetComponent<Text>()
-        .color = MainService.RGBToColor("rgb(70, 125, 252)");
-        active.transform.Find("Icon").GetComponent<Image>()
-        .color = MainService.RGBToColor("rgb(70, 125, 252)");
+        active.transform.Find("Title").GetComponent<Text>().color = MainService.RGBToColor("rgb(70, 125, 252)");
+        active.transform.Find("Icon").GetComponent<Image>().color = MainService.RGBToColor("rgb(70, 125, 252)");
 
         demoMenu.SetActive(true);
         selectMenu.SetActive(false);
@@ -296,17 +292,13 @@ public class UiControl : MonoBehaviour
     {
         if (menuSelected != null)
         {
-            menuSelected.transform.Find("Title").GetComponent<Text>()
-            .color = MainService.RGBToColor("rgb(255, 255, 255)");
-            menuSelected.transform.Find("Icon").GetComponent<Image>()
-            .color = MainService.RGBToColor("rgb(120, 120, 120)");
+            menuSelected.transform.Find("Title").GetComponent<Text>().color = MainService.RGBToColor("rgb(255, 255, 255)");
+            menuSelected.transform.Find("Icon").GetComponent<Image>().color = MainService.RGBToColor("rgb(120, 120, 120)");
         }
 
         menuSelected = active;
-        active.transform.Find("Title").GetComponent<Text>()
-        .color = MainService.RGBToColor("rgb(70, 125, 252)");
-        active.transform.Find("Icon").GetComponent<Image>()
-        .color = MainService.RGBToColor("rgb(70, 125, 252)");
+        active.transform.Find("Title").GetComponent<Text>().color = MainService.RGBToColor("rgb(70, 125, 252)");
+        active.transform.Find("Icon").GetComponent<Image>().color = MainService.RGBToColor("rgb(70, 125, 252)");
 
         demoMenu.SetActive(false);
         selectMenu.SetActive(true);
@@ -322,17 +314,13 @@ public class UiControl : MonoBehaviour
     {
         if (menuSelected != null)
         {
-            menuSelected.transform.Find("Title").GetComponent<Text>()
-            .color = MainService.RGBToColor("rgb(255, 255, 255)");
-            menuSelected.transform.Find("Icon").GetComponent<Image>()
-            .color = MainService.RGBToColor("rgb(120, 120, 120)");
+            menuSelected.transform.Find("Title").GetComponent<Text>().color = MainService.RGBToColor("rgb(255, 255, 255)");
+            menuSelected.transform.Find("Icon").GetComponent<Image>().color = MainService.RGBToColor("rgb(120, 120, 120)");
         }
 
         menuSelected = active;
-        active.transform.Find("Title").GetComponent<Text>()
-        .color = MainService.RGBToColor("rgb(70, 125, 252)");
-        active.transform.Find("Icon").GetComponent<Image>()
-        .color = MainService.RGBToColor("rgb(70, 125, 252)");
+        active.transform.Find("Title").GetComponent<Text>().color = MainService.RGBToColor("rgb(70, 125, 252)");
+        active.transform.Find("Icon").GetComponent<Image>().color = MainService.RGBToColor("rgb(70, 125, 252)");
 
         demoMenu.SetActive(false);
         selectMenu.SetActive(false);
