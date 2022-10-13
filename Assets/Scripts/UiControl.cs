@@ -13,6 +13,7 @@ public class UiControl : MonoBehaviour
     public MainService mainService;
     public PanoControl panoControl;
     public GameObject prefab;
+    public GameObject secondPrefab;
     public GameObject logo;
     public GameObject loading;
     public GameObject loadTour;
@@ -25,6 +26,7 @@ public class UiControl : MonoBehaviour
     public GameObject demoMenu;
     public GameObject alert;
     public GameObject menuSelected;
+    public GameObject notFound;
     public Transform contentScroll;
     public Transform contentDownload;
     public Transform contentTour;
@@ -147,34 +149,44 @@ public class UiControl : MonoBehaviour
     public void LoadTourLocal()
     {
        var directores = Directory.GetDirectories(Application.persistentDataPath + "/Panoramas/");
-       foreach (var item in directores)
-       {
-            var itemObject = Instantiate<GameObject>(prefab, contentDownload);
-            var data = File.ReadAllText(item + "/data.json");
-            var dataJson = JSON.Parse(data);
+        if (directores.Length > 0)
+        {
+            notFound.SetActive(false);
+            foreach (var item in directores)
+            {
+                var itemObject = Instantiate<GameObject>(secondPrefab, contentDownload);
+                var data = File.ReadAllText(item + "/data.json");
+                var dataJson = JSON.Parse(data);
 
-            var texture = mainService.GetTextureLocal(item + "/thumbnail");
-            var rawImage = itemObject.GetComponent<RawImage>();
-            rawImage.texture = texture;
-            
-            var textObject = itemObject.GetComponentInChildren<Text>();
-            textObject.text = dataJson["name"];
+                var texture = mainService.GetTextureLocal(item + "/thumbnail");
+                var rawImage = itemObject.GetComponent<RawImage>();
+                rawImage.texture = texture;
+                
+                var textObject = itemObject.GetComponentInChildren<Text>();
+                textObject.text = dataJson["name"];
 
-            var button = itemObject.GetComponent<Button>();
-            button.onClick.AddListener(() => {
+                var button = itemObject.GetComponent<Button>();
+                button.onClick.AddListener(() => {
 
-                panoControl.SetPanoLocal(item, texture, item);
+                    panoControl.SetPanoLocal(item, texture, item);
 
-                sidebarMenu.SetActive(false);
-                selectMenu.SetActive(false);
-                downloadMenu.SetActive(false);
-                secondMoreBtn.SetActive(true);
-                logo.SetActive(true);
-                cam.enabled = true;
-                bgMenu.enabled = false;
-                bgSide.enabled = false;
-            });
-       }
+                    sidebarMenu.SetActive(false);
+                    selectMenu.SetActive(false);
+                    downloadMenu.SetActive(false);
+                    secondMoreBtn.SetActive(true);
+                    logo.SetActive(true);
+                    cam.enabled = true;
+                    bgMenu.enabled = false;
+                    bgSide.enabled = false;
+                });
+            }
+        }
+        
+        else
+        {
+            notFound.SetActive(true);
+        }
+       
     }
 
     /// ======================================================
