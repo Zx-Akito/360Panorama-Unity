@@ -217,7 +217,7 @@ public class UiControl : MonoBehaviour
     public IEnumerator ShowAlert()
     {
         alert.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         alert.SetActive(false);
     }
 
