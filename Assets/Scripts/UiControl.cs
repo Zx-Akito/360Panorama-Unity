@@ -25,8 +25,10 @@ public class UiControl : MonoBehaviour
     public GameObject downloadMenu;
     public GameObject demoMenu;
     public GameObject alert;
+    public GameObject alertDelete;
     public GameObject menuSelected;
     public GameObject notFound;
+    public GameObject child;
     public Transform contentScroll;
     public Transform contentDownload;
     public Transform contentTour;
@@ -178,6 +180,24 @@ public class UiControl : MonoBehaviour
                     cam.enabled = true;
                     bgMenu.enabled = false;
                     bgSide.enabled = false;
+                });
+
+                var deleteBtn = itemObject.transform.Find("Button").GetComponentInChildren<Button>();
+                deleteBtn.onClick.AddListener(() => {
+                    alertDelete.SetActive(true);
+
+                    var alertBtn = alertDelete.GetComponentInChildren<Button>();
+                    alertBtn.onClick.RemoveAllListeners();
+                    alertBtn.onClick.AddListener(() => {
+                        Directory.Delete(item, true);
+                        Destroy(itemObject);
+                        alertDelete.SetActive(false);
+
+                        if (contentDownload.childCount == 1)
+                        {
+                            notFound.SetActive(true);
+                        }
+                    });
                 });
             }
         }
