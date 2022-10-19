@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class CameraRotate : MonoBehaviour
 {
     // Start Property
-    public float cameraSmoothingFactor = 1;
     public string mode = "gesture";
-    public float maxUp = -60;
-    public float maxDown = 60;
     public Slider slider;
+    public float cameraSmoothingFactor = 1;
+    public float rotationSpeed = 1.0f;
+    private float maxUp = -60;
+    private float maxDown = 60;
     bool isDown = false;
     // End Property
     
@@ -19,6 +20,13 @@ public class CameraRotate : MonoBehaviour
     {
         Input.gyro.enabled = true;
         camRotation = transform.localRotation;
+
+        // Slider Function
+        slider.onValueChanged.AddListener
+        (delegate
+            {
+                valueChangeCheck();
+            });
     }
 
     void Update()
@@ -58,9 +66,10 @@ public class CameraRotate : MonoBehaviour
 
         if(isDown) 
         { 
-            camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor*(-1);
-            camRotation.y += Input.GetAxis("Mouse X") * cameraSmoothingFactor;
+            camRotation.x += rotationSpeed * Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
+            camRotation.y += rotationSpeed * Input.GetAxis("Mouse X") * cameraSmoothingFactor;
 
+            // Limit Rotation
             camRotation.x = Mathf.Clamp(camRotation.x, maxUp, maxDown);
 
             transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z); 
@@ -76,5 +85,10 @@ public class CameraRotate : MonoBehaviour
 
         Quaternion newPosition = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y, Input.gyro.attitude.z, Input.gyro.attitude.w);
         transform.localRotation = newPosition * new Quaternion(0, 0, 1, 0);
+    }
+
+    public void valueChangeCheck()
+    {
+        rotationSpeed = slider.value;
     }
 }
