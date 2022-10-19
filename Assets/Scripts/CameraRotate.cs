@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraRotate : MonoBehaviour
 {
     // Start Property
-    public float speedH = 5.0f;
-    public float speedV = 5.0f;
-    private float yaw = 0.0f;
-    private float pitch = 0.0f;
+    public float cameraSmoothingFactor = 1;
     public string mode = "gesture";
+    public float maxUp = -60;
+    public float maxDown = 60;
+    public Slider slider;
     bool isDown = false;
     // End Property
     
+    private Quaternion camRotation;
     void Start()
     {
         Input.gyro.enabled = true;
+        camRotation = transform.localRotation;
     }
 
     void Update()
@@ -54,11 +57,13 @@ public class CameraRotate : MonoBehaviour
         }
 
         if(isDown) 
-        {
-            yaw += speedH = Input.GetAxis("Mouse X");
-            pitch -= speedV = Input.GetAxis("Mouse Y");
+        { 
+            camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor*(-1);
+            camRotation.y += Input.GetAxis("Mouse X") * cameraSmoothingFactor;
 
-            transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);   
+            camRotation.x = Mathf.Clamp(camRotation.x, maxUp, maxDown);
+
+            transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z); 
         }
     }
 
