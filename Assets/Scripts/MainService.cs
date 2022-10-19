@@ -157,11 +157,19 @@ public class MainService : MonoBehaviour
     }
 
     /// ======================================================
+    /// Fix The Inverted Gesture Position
+    /// ======================================================
+    public void FixGesture(GameObject fixGesture)
+    {
+        fixGesture.transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    /// ======================================================
     /// Fix The Inverted Gyro Position
     /// ======================================================
     public void FixGyro(GameObject fixGyro)
     {
-        fixGyro.transform.localRotation = Quaternion.Euler(90,0,0);
+        fixGyro.transform.localRotation = Quaternion.Euler(90, 0, 0);
     }
 
     /// ======================================================
